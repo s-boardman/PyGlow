@@ -13,7 +13,7 @@
 
 from smbus import SMBus
 import RPi.GPIO as rpi
-import re
+import re, sys
 
 bus = 0
 
@@ -26,7 +26,7 @@ class PiGlow:
             i2c_bus = 1
         else:
             print "Unable to determine Raspberry Pi revision."
-            exit
+            sys.exit(1)
 
         self.bus = SMBus(i2c_bus)
         self.bus.write_i2c_block_data(0x54, 0x00, [0x01])
@@ -103,6 +103,7 @@ class PiGlow:
             self.bus.write_byte_data(0x54, 0x16, 0xFF)
         else:
             print "Unknown number, expected only 1, 2 or 3"
+            sys.exit(1)
 
     def arm1(self, value):
         self.bus.write_byte_data(0x54, 0x07, value)
@@ -168,6 +169,7 @@ class PiGlow:
             self.bus.write_byte_data(0x54, 0x16, 0xFF)
         else:
             print "Only colours 1 - 6 or color names are allowed"
+            sys.exit(1)
 
     def led(self, led, value):
         if isinstance(led, int):
@@ -180,6 +182,7 @@ class PiGlow:
                     "red3": "0x01", "orange3": "0x02", "yellow3": "0x03", "green3": "0x04", "blue3": "0x0F", "white3": "0x0D"}
         else:
             print "Only led 1-18 or <color><arm number> (eg. red1 or blue3) are allowed"
+            sys.exit(1)
         self.bus.write_byte_data(0x54, int(leds[led], 16), value)
         self.bus.write_byte_data(0x54, 0x16, 0xFF)
 
