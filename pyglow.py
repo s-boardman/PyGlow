@@ -35,16 +35,20 @@ class PyGlow:
 
     def all(self, value):
 
-        ## set brightness for all leds and uses "v" for smaller code
-        v = value
-        self.bus.write_i2c_block_data(0x54, 0x01, [v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v])
-        self.bus.write_byte_data(0x54, 0x16, 0xFF)
+        ## check if given brightness value is ok
+        if 0 <= value <= 255:
+            ## set brightness for all leds and uses "v" for smaller code
+            v = value
+            self.bus.write_i2c_block_data(0x54, 0x01, [v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v])
+            self.bus.write_byte_data(0x54, 0x16, 0xFF)
+        else:
+            lightsoff("usage: all([0-255])")
 
 
     def led(self, led, value):
 
-        ## check if a existing led is choosen
-        if isinstance(led, int) and 1 <= led <= 18:
+        ## check if an existing led is choosen & if brightness value is ok
+        if isinstance(led, int) and 1 <= led <= 18 and 0 <= value <= 255:
             leds = [
                 "0x00", "0x07", "0x08", "0x09", "0x06", "0x05", "0x0A", "0x12", "0x11",
                 "0x10", "0x0E", "0x0C", "0x0B", "0x01", "0x02", "0x03", "0x04", "0x0F", "0x0D"]
@@ -62,7 +66,8 @@ class PyGlow:
 
     def arm(self, arm, value):
 
-        if arm == 1:
+        ## check if an existing arm is choosen & if brightness value is ok
+        if arm == 1 and 0 <= value <= 255:
             self.bus.write_byte_data(0x54, 0x07, value)
             self.bus.write_byte_data(0x54, 0x08, value)
             self.bus.write_byte_data(0x54, 0x09, value)
@@ -70,7 +75,7 @@ class PyGlow:
             self.bus.write_byte_data(0x54, 0x05, value)
             self.bus.write_byte_data(0x54, 0x0A, value)
             self.bus.write_byte_data(0x54, 0x16, 0xFF)
-        elif arm == 2:
+        elif arm == 2 and 0 <= value <= 255:
             self.bus.write_byte_data(0x54, 0x0B, value)
             self.bus.write_byte_data(0x54, 0x0C, value)
             self.bus.write_byte_data(0x54, 0x0E, value)
@@ -78,7 +83,7 @@ class PyGlow:
             self.bus.write_byte_data(0x54, 0x11, value)
             self.bus.write_byte_data(0x54, 0x12, value)
             self.bus.write_byte_data(0x54, 0x16, 0xFF)
-        elif arm == 3:
+        elif arm == 3 and 0 <= value <= 255:
             self.bus.write_byte_data(0x54, 0x01, value)
             self.bus.write_byte_data(0x54, 0x02, value)
             self.bus.write_byte_data(0x54, 0x03, value)
@@ -92,32 +97,33 @@ class PyGlow:
 
     def color(self, color, value):
 
-        if color == 1 or color == "white":
+        ## check if an available color is choosen & if brightness value is ok
+        if (color == 1 or color == "white") and 0 <= value <= 255:
             self.bus.write_byte_data(0x54, 0x0A, value)
             self.bus.write_byte_data(0x54, 0x0B, value)
             self.bus.write_byte_data(0x54, 0x0D, value)
             self.bus.write_byte_data(0x54, 0x16, 0xFF)
-        elif color == 2 or color == "blue":
+        elif (color == 2 or color == "blue") and 0 <= value <= 255:
             self.bus.write_byte_data(0x54, 0x05, value)
             self.bus.write_byte_data(0x54, 0x0C, value)
             self.bus.write_byte_data(0x54, 0x0F, value)
             self.bus.write_byte_data(0x54, 0x16, 0xFF)
-        elif color == 3 or color == "green":
+        elif (color == 3 or color == "green") and 0 <= value <= 255:
             self.bus.write_byte_data(0x54, 0x06, value)
             self.bus.write_byte_data(0x54, 0x04, value)
             self.bus.write_byte_data(0x54, 0x0E, value)
             self.bus.write_byte_data(0x54, 0x16, 0xFF)
-        elif color == 4 or color == "yellow":
+        elif (color == 4 or color == "yellow") and 0 <= value <= 255:
             self.bus.write_byte_data(0x54, 0x09, value)
             self.bus.write_byte_data(0x54, 0x03, value)
             self.bus.write_byte_data(0x54, 0x10, value)
             self.bus.write_byte_data(0x54, 0x16, 0xFF)
-        elif color == 5 or color == "orange":
+        elif (color == 5 or color == "orange") and 0 <= value <= 255:
             self.bus.write_byte_data(0x54, 0x08, value)
             self.bus.write_byte_data(0x54, 0x02, value)
             self.bus.write_byte_data(0x54, 0x11, value)
             self.bus.write_byte_data(0x54, 0x16, 0xFF)
-        elif color == 6 or color == "red":
+        elif (color == 6 or color == "red") and 0 <= value <= 255:
             self.bus.write_byte_data(0x54, 0x07, value)
             self.bus.write_byte_data(0x54, 0x01, value)
             self.bus.write_byte_data(0x54, 0x12, value)
