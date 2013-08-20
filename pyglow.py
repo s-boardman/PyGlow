@@ -37,31 +37,60 @@ class PyGlow:
 
         ## check if given brightness value is ok
         if 0 <= value <= 255:
-            ## set brightness for all leds and uses "v" for smaller code
-            v = value
-            self.bus.write_i2c_block_data(0x54, 0x01, [v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v])
-            self.bus.write_byte_data(0x54, 0x16, 0xFF)
+            ## choose all leds
+            leds = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
+            self.set_leds(leds, value)
+            self.update_leds()
         else:
             lightsoff("usage: all([0-255])")
 
 
     def led(self, led, value):
 
-        ## check if an existing led is choosen & if brightness value is ok
-        if isinstance(led, int) and 1 <= led <= 18 and 0 <= value <= 255:
-            leds = [
-                "0x00", "0x07", "0x08", "0x09", "0x06", "0x05", "0x0A", "0x12", "0x11",
-                "0x10", "0x0E", "0x0C", "0x0B", "0x01", "0x02", "0x03", "0x04", "0x0F", "0x0D"]
-        elif re.match('^[a-z]+[1-3]$', str(led)) and 0 <= value <= 255:
-            leds = {"red1": "0x07", "orange1": "0x08", "yellow1": "0x09", "green1": "0x06", "blue1": "0x05", "white1": "0x0A",
-                    "red2": "0x12", "orange2": "0x11", "yellow2": "0x10", "green2": "0x0E", "blue2": "0x0C", "white2": "0x0B",
-                    "red3": "0x01", "orange3": "0x02", "yellow3": "0x03", "green3": "0x04", "blue3": "0x0F", "white3": "0x0D"}
-        else:
-            self.lightsoff("usage: led(<color>[1-3],[0-255]) or led([1-18],[0-255]) | lights up the <color> led on arm[1-3] with brightness [0-255]")
+        ## use set_leds & update_leds
+        led = [led];
+        self.set_leds(led, value)
+        self.update_leds()
 
-        ## light up the given led with the given value
-        self.bus.write_byte_data(0x54, int(leds[led], 16), value)
-        self.bus.write_byte_data(0x54, 0x16, 0xFF)
+
+    def arm(self, arm, value):
+
+        ## check if an existing arm is choosen & if brightness value is ok
+        if arm == 1 and 0 <= value <= 255:
+            leds = [1,2,3,4,5,6]
+        elif arm == 2 and 0 <= value <= 255:
+            leds = [7,8,9,10,11,12]
+        elif arm == 3 and 0 <= value <= 255:
+            leds = [13,14,15,16,17,18]
+        else:
+            self.lightsoff("usage: arm([1-3],[0-255])")
+
+        ## light up the choosen leds
+        self.set_leds(leds, value)
+        self.update_leds()
+
+
+    def color(self, color, value):
+
+        ## check if an available color is choosen & if brightness value is ok
+        if (color == 1 or color == "white") and 0 <= value <= 255:
+            leds = [6,12,18]
+        elif (color == 2 or color == "blue") and 0 <= value <= 255:
+            leds = [5,11,17]
+        elif (color == 3 or color == "green") and 0 <= value <= 255:
+            leds = [4,10,16]
+        elif (color == 4 or color == "yellow") and 0 <= value <= 255:
+            leds = [3,9,15]
+        elif (color == 5 or color == "orange") and 0 <= value <= 255:
+            leds = [2,8,14]
+        elif (color == 6 or color == "red") and 0 <= value <= 255:
+            leds = [1,7,13]
+        else:
+            self.lightsoff("usage: color(<color>,[-0-255])")
+
+        ## light up the choosen leds
+        self.set_leds(leds, value)
+        self.update_leds()
 
 
     def set_leds(self, leds, value):
@@ -86,74 +115,6 @@ class PyGlow:
     
         ## tell the ic to update the leds
         self.bus.write_byte_data(0x54, 0x16, 0xFF)
-
-
-    def arm(self, arm, value):
-
-        ## check if an existing arm is choosen & if brightness value is ok
-        if arm == 1 and 0 <= value <= 255:
-            self.bus.write_byte_data(0x54, 0x07, value)
-            self.bus.write_byte_data(0x54, 0x08, value)
-            self.bus.write_byte_data(0x54, 0x09, value)
-            self.bus.write_byte_data(0x54, 0x06, value)
-            self.bus.write_byte_data(0x54, 0x05, value)
-            self.bus.write_byte_data(0x54, 0x0A, value)
-            self.bus.write_byte_data(0x54, 0x16, 0xFF)
-        elif arm == 2 and 0 <= value <= 255:
-            self.bus.write_byte_data(0x54, 0x0B, value)
-            self.bus.write_byte_data(0x54, 0x0C, value)
-            self.bus.write_byte_data(0x54, 0x0E, value)
-            self.bus.write_byte_data(0x54, 0x10, value)
-            self.bus.write_byte_data(0x54, 0x11, value)
-            self.bus.write_byte_data(0x54, 0x12, value)
-            self.bus.write_byte_data(0x54, 0x16, 0xFF)
-        elif arm == 3 and 0 <= value <= 255:
-            self.bus.write_byte_data(0x54, 0x01, value)
-            self.bus.write_byte_data(0x54, 0x02, value)
-            self.bus.write_byte_data(0x54, 0x03, value)
-            self.bus.write_byte_data(0x54, 0x04, value)
-            self.bus.write_byte_data(0x54, 0x0F, value)
-            self.bus.write_byte_data(0x54, 0x0D, value)
-            self.bus.write_byte_data(0x54, 0x16, 0xFF)
-        else:
-            self.lightsoff("usage: arm([1-3],[0-255])")
-
-
-    def color(self, color, value):
-
-        ## check if an available color is choosen & if brightness value is ok
-        if (color == 1 or color == "white") and 0 <= value <= 255:
-            self.bus.write_byte_data(0x54, 0x0A, value)
-            self.bus.write_byte_data(0x54, 0x0B, value)
-            self.bus.write_byte_data(0x54, 0x0D, value)
-            self.bus.write_byte_data(0x54, 0x16, 0xFF)
-        elif (color == 2 or color == "blue") and 0 <= value <= 255:
-            self.bus.write_byte_data(0x54, 0x05, value)
-            self.bus.write_byte_data(0x54, 0x0C, value)
-            self.bus.write_byte_data(0x54, 0x0F, value)
-            self.bus.write_byte_data(0x54, 0x16, 0xFF)
-        elif (color == 3 or color == "green") and 0 <= value <= 255:
-            self.bus.write_byte_data(0x54, 0x06, value)
-            self.bus.write_byte_data(0x54, 0x04, value)
-            self.bus.write_byte_data(0x54, 0x0E, value)
-            self.bus.write_byte_data(0x54, 0x16, 0xFF)
-        elif (color == 4 or color == "yellow") and 0 <= value <= 255:
-            self.bus.write_byte_data(0x54, 0x09, value)
-            self.bus.write_byte_data(0x54, 0x03, value)
-            self.bus.write_byte_data(0x54, 0x10, value)
-            self.bus.write_byte_data(0x54, 0x16, 0xFF)
-        elif (color == 5 or color == "orange") and 0 <= value <= 255:
-            self.bus.write_byte_data(0x54, 0x08, value)
-            self.bus.write_byte_data(0x54, 0x02, value)
-            self.bus.write_byte_data(0x54, 0x11, value)
-            self.bus.write_byte_data(0x54, 0x16, 0xFF)
-        elif (color == 6 or color == "red") and 0 <= value <= 255:
-            self.bus.write_byte_data(0x54, 0x07, value)
-            self.bus.write_byte_data(0x54, 0x01, value)
-            self.bus.write_byte_data(0x54, 0x12, value)
-            self.bus.write_byte_data(0x54, 0x16, 0xFF)
-        else:
-            self.lightsoff("usage: color(<color>,[-0-255])")
 
 
     def lightsoff(self, msg):
