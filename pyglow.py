@@ -57,10 +57,34 @@ class PyGlow:
                     "red2": "0x12", "orange2": "0x11", "yellow2": "0x10", "green2": "0x0E", "blue2": "0x0C", "white2": "0x0B",
                     "red3": "0x01", "orange3": "0x02", "yellow3": "0x03", "green3": "0x04", "blue3": "0x0F", "white3": "0x0D"}
         else:
-            self.lightsoff("use: led(<color>[1-3],[0-255]) or led([1-18],[0-255]) | lights up the <color> led on arm[1-3] with brightness [0-255]")
+            self.lightsoff("usage: led(<color>[1-3],[0-255]) or led([1-18],[0-255]) | lights up the <color> led on arm[1-3] with brightness [0-255]")
 
         ## light up the given led with the given value
         self.bus.write_byte_data(0x54, int(leds[led], 16), value)
+        self.bus.write_byte_data(0x54, 0x16, 0xFF)
+
+
+    def set_leds(self, leds, value):
+
+        for led in leds:
+            if isinstance(led, int) and 1 <= led <= 18 and 0 <= value <= 255:
+                leds = [
+                    "0x00", "0x07", "0x08", "0x09", "0x06", "0x05", "0x0A", "0x12", "0x11",
+                    "0x10", "0x0E", "0x0C", "0x0B", "0x01", "0x02", "0x03", "0x04", "0x0F", "0x0D"]
+            elif re.match('^[a-z]+[1-3]$', str(led)) and 0 <= value <= 255:
+                leds = {"red1": "0x07", "orange1": "0x08", "yellow1": "0x09", "green1": "0x06", "blue1": "0x05", "white1": "0x0A",
+                        "red2": "0x12", "orange2": "0x11", "yellow2": "0x10", "green2": "0x0E", "blue2": "0x0C", "white2": "0x0B",
+                        "red3": "0x01", "orange3": "0x02", "yellow3": "0x03", "green3": "0x04", "blue3": "0x0F", "white3": "0x0D"}
+            else:
+                self.lightsoff("usage: set_leds(leds, value) | leds has to be a list of [1-18] or <color>[1-18]")
+
+            ## write update value to the ic
+            self.bus.write_byte_data(0x54, int(leds[led], 16), value)
+
+
+    def update_leds(self):
+    
+        ## tell the ic to update the leds
         self.bus.write_byte_data(0x54, 0x16, 0xFF)
 
 
