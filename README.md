@@ -1,7 +1,7 @@
 ## PyGlow
 
 PyGlow is a small Python module for the PiGlow addon by Pimoroni, it will let you flex the LED muscles of this fantastic addon.
-It was started as "PiGlow" by Boeeerb (https://github.com/Boeeerb/PiGlow) but i decided to fork it to provide a more clean and easier to use module.
+It was started as "PiGlow" by @Boeeerb (https://github.com/Boeeerb/PiGlow) but i (@ben_leb) decided to fork it to provide a more clean and easier to use module.
 
 
 ## Files
@@ -32,12 +32,14 @@ pyglow.arm([1-3],[0-255])           # Control an arm of LEDs by number
 All colors are from 0 (off) to 255 (super duper eye numbing bright!)
 
 
+
 ## Installation instructions
+
 
 ### Preparation
 
-For instruction hot to setuo your Raspberry Pi to use with PyGlow, please see
-https://github.com/pimoroni/pyglow#setting-up-your-raspberry-pi
+For instruction hot to setup your Raspberry Pi to use with PyGlow, please see
+https://github.com/pimoroni/piglow#setting-up-your-raspberry-pi
 
 
 ### Downloading the PyGlow module and testing
@@ -49,7 +51,7 @@ Now create a directory for it to live in then change to that directory:
 
 Next get the latest version of PyGlow python module:
 
-    wget https://raw.github.com/benlebb/PyGlow/master/pyglow.py
+    wget https://raw.github.com/benleb/PyGlow/master/pyglow.py
 
 This will give you a file called pyglow.py, this is the module and will do all the hardwork.
 
