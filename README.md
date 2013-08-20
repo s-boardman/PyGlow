@@ -36,10 +36,13 @@ pyglow.update_leds()                # updates the leds according to values set w
 ```
 the set_leds() & update_leds() function work as follow (theres also an set_leds.py in example/)
 ```python
+## first set of leds with brightness 50
 leds = [1,3,5,11,13,15]
 pyglow.set_leds(leds,50)
+## second set with brightness 150
 leds = [2,4,9]
 pyglow.set_leds(leds,150)
+## and now this lights up the leds
 pyglow.update_leds()
 ```
 
