@@ -9,6 +9,7 @@ It was started as "PiGlow" by Jason (@Boeeerb https://github.com/Boeeerb/PiGlow)
  - pyglow.py - Python module you'll import into your script
  - examples/test.py - You choose the brightness of each LED color group, to see how it will look
  - examples/clock.py - binary clock by Jason (@Boeeerb)
+ - examples/cpu.py - shows your cpu usage on the PiGlow by Jason (@Boeeerb)
 
 
 ## Requirements
