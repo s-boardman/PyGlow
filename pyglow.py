@@ -52,7 +52,7 @@ class PyGlow:
             leds = [
                 "0x00", "0x07", "0x08", "0x09", "0x06", "0x05", "0x0A", "0x12", "0x11",
                 "0x10", "0x0E", "0x0C", "0x0B", "0x01", "0x02", "0x03", "0x04", "0x0F", "0x0D"]
-        elif re.match('^[a-z]+[1-3]$', str(led)):
+        elif re.match('^[a-z]+[1-3]$', str(led)) and 0 <= value <= 255:
             leds = {"red1": "0x07", "orange1": "0x08", "yellow1": "0x09", "green1": "0x06", "blue1": "0x05", "white1": "0x0A",
                     "red2": "0x12", "orange2": "0x11", "yellow2": "0x10", "green2": "0x0E", "blue2": "0x0C", "white2": "0x0B",
                     "red3": "0x01", "orange3": "0x02", "yellow3": "0x03", "green3": "0x04", "blue3": "0x0F", "white3": "0x0D"}
