@@ -1,13 +1,14 @@
 ## PyGlow
 
 PyGlow is a small Python module for the PiGlow addon by Pimoroni, it will let you flex the LED muscles of this fantastic addon.
-It was started as "PiGlow" by @Boeeerb (https://github.com/Boeeerb/PiGlow) but i (@ben_leb) decided to fork it to provide a more clean and easier to use module.
+It was started as "PiGlow" by Jason (@Boeeerb https://github.com/Boeeerb/PiGlow) but i (@ben_leb) decided to fork it to provide a more clean and easier to use module.
 
 
 ## Files
 
  - pyglow.py - Python module you'll import into your script
  - examples/test.py - You choose the brightness of each LED color group, to see how it will look
+ - examples/clock.py - binary clock by Jason (@Boeeerb)
 
 
 ## Requirements
