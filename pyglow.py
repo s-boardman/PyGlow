@@ -42,7 +42,7 @@ class PyGlow:
             self.set_leds(leds, value)
             self.update_leds()
         else:
-            lightsoff("usage: all([0-255])")
+            lights_off("usage: all([0-255])")
 
 
     def led(self, led, value):
@@ -63,7 +63,7 @@ class PyGlow:
         elif arm == 3 and 0 <= value <= 255:
             leds = [13,14,15,16,17,18]
         else:
-            self.lightsoff("usage: arm([1-3],[0-255])")
+            self.lights_off("usage: arm([1-3],[0-255])")
 
         ## light up the choosen leds
         self.set_leds(leds, value)
@@ -86,7 +86,7 @@ class PyGlow:
         elif (color == 6 or color == "red") and 0 <= value <= 255:
             leds = [1,7,13]
         else:
-            self.lightsoff("usage: color(<color>,[-0-255])")
+            self.lights_off("usage: color(<color>,[-0-255])")
 
         ## light up the choosen leds
         self.set_leds(leds, value)
@@ -105,7 +105,7 @@ class PyGlow:
                         "red2": "0x12", "orange2": "0x11", "yellow2": "0x10", "green2": "0x0E", "blue2": "0x0C", "white2": "0x0B",
                         "red3": "0x01", "orange3": "0x02", "yellow3": "0x03", "green3": "0x04", "blue3": "0x0F", "white3": "0x0D"}
             else:
-                self.lightsoff("usage: set_leds(leds, value) | leds has to be a list of [1-18] or <color>[1-18]")
+                self.lights_off("usage: set_leds(leds, value) | leds has to be a list of [1-18] or <color>[1-18]")
 
             ## write update value to the ic
             self.bus.write_byte_data(0x54, int(leds[led], 16), value)
@@ -117,7 +117,7 @@ class PyGlow:
         self.bus.write_byte_data(0x54, 0x16, 0xFF)
 
 
-    def lightsoff(self, msg):
+    def lights_off(self, msg):
 
         ## exit function with shuts down the leds
         self.all(0)
