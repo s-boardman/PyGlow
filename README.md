@@ -32,11 +32,13 @@ pyglow.arm([1-3],[0-255])           # Control an arm of LEDs by number
 All colors are from 0 (off) to 255 (super duper eye numbing bright!)
 
 
+
 ## Installation instructions
+
 
 ### Preparation
 
-For instruction hot to setuo your Raspberry Pi to use with PyGlow, please see
+For instruction hot to setup your Raspberry Pi to use with PyGlow, please see
 https://github.com/pimoroni/pyglow#setting-up-your-raspberry-pi
 
 
