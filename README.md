@@ -4,6 +4,12 @@ PyGlow is a small Python module for the PiGlow addon by Pimoroni, it will let yo
 It was started as "PiGlow" by Jason (@Boeeerb https://github.com/Boeeerb/PiGlow) but i (@ben_leb) decided to fork it to provide a more clean and easier to use module.
 
 
+## Features
+
+ - Control a single LED, a single Arm, a single color or any combination of this
+ - Gamma Correction
+
+
 ## Files
 
  - pyglow.py - Python module you'll import into your script
