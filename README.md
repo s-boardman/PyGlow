@@ -39,7 +39,7 @@ All colors are from 0 (off) to 255 (super duper eye numbing bright!)
 ### Preparation
 
 For instruction hot to setup your Raspberry Pi to use with PyGlow, please see
-https://github.com/pimoroni/pyglow#setting-up-your-raspberry-pi
+https://github.com/pimoroni/piglow#setting-up-your-raspberry-pi
 
 
 ### Downloading the PyGlow module and testing
@@ -51,7 +51,7 @@ Now create a directory for it to live in then change to that directory:
 
 Next get the latest version of PyGlow python module:
 
-    wget https://raw.github.com/benlebb/PyGlow/master/pyglow.py
+    wget https://raw.github.com/benleb/PyGlow/master/pyglow.py
 
 This will give you a file called pyglow.py, this is the module and will do all the hardwork.
 
