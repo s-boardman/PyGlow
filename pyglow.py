@@ -10,6 +10,14 @@ import re, sys
 import RPi.GPIO as rpi
 from smbus import SMBus
 
+## some addresses
+I2C_ADDR = 0x54
+EN_OUTPUT_ADDR = 0x00
+EN_ARM1_ADDR = 0x13
+EN_ARM2_ADDR = 0x14
+EN_ARM3_ADDR = 0x15
+UPD_PWM_ADDR = 0x16
+
 bus = 0
 
 class PyGlow:
@@ -27,10 +35,12 @@ class PyGlow:
 
         ## enables the leds
         self.bus = SMBus(i2c_bus)
-        self.bus.write_i2c_block_data(0x54, 0x00, [0x01])
-        self.bus.write_byte_data(0x54, 0x13, 0xFF)
-        self.bus.write_byte_data(0x54, 0x14, 0xFF)
-        self.bus.write_byte_data(0x54, 0x15, 0xFF)
+        ## first we tell the SN3218 to enable output
+        self.bus.write_byte_data(I2C_ADDR, EN_OUTPUT_ADDR, 0x01)
+        ## then we ask it to enable each led arm
+        self.bus.write_byte_data(I2C_ADDR, EN_ARM1_ADDR, 0xFF)
+        self.bus.write_byte_data(I2C_ADDR, EN_ARM2_ADDR, 0xFF)
+        self.bus.write_byte_data(I2C_ADDR, EN_ARM3_ADDR, 0xFF)
 
 
     def all(self, value):
@@ -108,13 +118,13 @@ class PyGlow:
                 self.lights_off("usage: set_leds(leds, value) | leds has to be a list of [1-18] or <color>[1-18]")
 
             ## write update value to the ic
-            self.bus.write_byte_data(0x54, int(leds[led], 16), value)
+            self.bus.write_byte_data(I2C_ADDR, int(leds[led], 16), value)
 
 
     def update_leds(self):
     
         ## tell the ic to update the leds
-        self.bus.write_byte_data(0x54, 0x16, 0xFF)
+        self.bus.write_byte_data(I2C_ADDR, UPD_PWM_ADDR, 0xFF)
 
 
     def lights_off(self, msg):
