@@ -26,6 +26,7 @@ from pyglow import PyGlow
 pyglow = PyGlow()
 pyglow.all([0-255])                 # Control all LEDs together
 pyglow.led(<color>[1-3],[0-255])    # Control an individual LED by color + arm-number eg. "red2"
+pyglow.led([1-18],[0-255])          # Control an individual LED number
 pyglow.color([1-6],[0-255])         # 1=White, 2=Blue, 3=Green, 4=Yellow, 5=Orange, 6=Red
 pyglow.color(<color>,[0-255])       # "white", "blue", "green", "yellow", "orange", "red"
 pyglow.arm([1-3],[0-255])           # Control an arm of LEDs by number
