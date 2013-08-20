@@ -53,8 +53,7 @@ class PyGlow:
                     "red2": "0x12", "orange2": "0x11", "yellow2": "0x10", "green2": "0x0E", "blue2": "0x0C", "white2": "0x0B",
                     "red3": "0x01", "orange3": "0x02", "yellow3": "0x03", "green3": "0x04", "blue3": "0x0F", "white3": "0x0D"}
         else:
-            print "use: led(<color>[1-3],[0-255]) or led([1-18],[0-255]) | lights up the <color> led on arm[1-3] with brightness [0-255]"
-            sys.exit(1)
+            self.lightsoff("use: led(<color>[1-3],[0-255]) or led([1-18],[0-255]) | lights up the <color> led on arm[1-3] with brightness [0-255]")
 
         ## light up the given led with the given value
         self.bus.write_byte_data(0x54, int(leds[led], 16), value)
@@ -88,8 +87,7 @@ class PyGlow:
             self.bus.write_byte_data(0x54, 0x0D, value)
             self.bus.write_byte_data(0x54, 0x16, 0xFF)
         else:
-            print "usage: arm([1-3],[0-255])"
-            sys.exit(1)
+            self.lightsoff("usage: arm([1-3],[0-255])")
 
 
     def color(self, color, value):
@@ -125,5 +123,12 @@ class PyGlow:
             self.bus.write_byte_data(0x54, 0x12, value)
             self.bus.write_byte_data(0x54, 0x16, 0xFF)
         else:
-            print "usage: color(<color>,[-0-255])"
-            sys.exit(1)
+            self.lightsoff("usage: color(<color>,[-0-255])")
+
+
+    def lightsoff(self, msg):
+
+        ## exit function with shuts down the leds
+        self.all(0)
+        print msg
+        sys.exit(1)
