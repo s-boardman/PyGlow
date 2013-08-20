@@ -16,8 +16,8 @@ pyglow = PyGlow()
 
 ### You can customise these settings ###
 
-show12hr = 1            # Show 12 or 24hr clock - 0= 24hr, 1= 12hr
-ledbrightness = 10      # Set brightness of LED - 1-255 (recommend 10-20, put 0 and you won't see it!)
+show12hr = 0            # Show 12 or 24hr clock - 0= 24hr, 1= 12hr
+ledbrightness = 50      # Set brightness of LED - 1-255 (recommend 10-20, put 0 and you won't see it!)
 hourflash = 1           # Choose how to flash change of hour - 1= white leds, 2= all flash
 
 armtop = "s"            # h= hour, m= minutes, s= seconds
