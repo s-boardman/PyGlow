@@ -47,10 +47,14 @@ class PyGlow:
 
     def led(self, led, value):
 
-        ## use set_leds & update_leds
-        led = [led];
-        self.set_leds(led, value)
-        self.update_leds()
+        ## check if an existing led is choosen & if brightness value is ok
+        if 1 <= led <= 18 and 0 <= value <= 255:
+            ## use set_leds & update_leds
+            led = [led];
+            self.set_leds(led, value)
+            self.update_leds()
+        else:
+            self.lightsoff("usage: led([1-18],[0-255]) or led(<color>[1-3],[0-255])")
 
 
     def arm(self, arm, value):
