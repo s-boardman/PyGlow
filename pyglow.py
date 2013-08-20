@@ -1,0 +1,125 @@
+##
+##  PyGlow
+##
+##      python module to control Pimoronis PiGlow (http://shop.pimoroni.com/products/piglow)
+##
+##      for info & documentation see:    https://github.com/benleb/PYGlow
+##
+
+import re, sys
+import RPi.GPIO as rpi
+from smbus import SMBus
+
+bus = 0
+
+class PyGlow:
+
+    def __init__(self):
+
+        ## check if its an old v1 or v2 raspi
+        if rpi.RPI_REVISION == 1:
+            i2c_bus = 0
+        elif rpi.RPI_REVISION == 2:
+            i2c_bus = 1
+        else:
+            print "Unable to determine Raspberry Pi Hardware-Revision."
+            sys.exit(1)
+
+        ## enables the leds
+        self.bus = SMBus(i2c_bus)
+        self.bus.write_i2c_block_data(0x54, 0x00, [0x01])
+        self.bus.write_byte_data(0x54, 0x13, 0xFF)
+        self.bus.write_byte_data(0x54, 0x14, 0xFF)
+        self.bus.write_byte_data(0x54, 0x15, 0xFF)
+
+
+    def all(self, value):
+
+        ## set brightness for all leds and uses "v" for smaller code
+        v = value
+        self.bus.write_i2c_block_data(0x54, 0x01, [v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v])
+        self.bus.write_byte_data(0x54, 0x16, 0xFF)
+
+
+    def led(self, led, value):
+
+        ## check if a existing led is choosen
+        if re.match('^[a-z]+[1-3]$', str(led)):
+            leds = {"red1": "0x07", "orange1": "0x08", "yellow1": "0x09", "green1": "0x06", "blue1": "0x05", "white1": "0x0A",
+                    "red2": "0x12", "orange2": "0x11", "yellow2": "0x10", "green2": "0x0E", "blue2": "0x0C", "white2": "0x0B",
+                    "red3": "0x01", "orange3": "0x02", "yellow3": "0x03", "green3": "0x04", "blue3": "0x0F", "white3": "0x0D"}
+        else:
+            print "use: led(<color>[1-3],[0-255]) | lights up the <color> led on arm[1-3] with brightness [0-255]"
+            sys.exit(1)
+
+        ## light up the given led with the given value
+        self.bus.write_byte_data(0x54, int(leds[led], 16), value)
+        self.bus.write_byte_data(0x54, 0x16, 0xFF)
+
+
+    def arm(self, arm, value):
+
+        if arm == 1:
+            self.bus.write_byte_data(0x54, 0x07, value)
+            self.bus.write_byte_data(0x54, 0x08, value)
+            self.bus.write_byte_data(0x54, 0x09, value)
+            self.bus.write_byte_data(0x54, 0x06, value)
+            self.bus.write_byte_data(0x54, 0x05, value)
+            self.bus.write_byte_data(0x54, 0x0A, value)
+            self.bus.write_byte_data(0x54, 0x16, 0xFF)
+        elif arm == 2:
+            self.bus.write_byte_data(0x54, 0x0B, value)
+            self.bus.write_byte_data(0x54, 0x0C, value)
+            self.bus.write_byte_data(0x54, 0x0E, value)
+            self.bus.write_byte_data(0x54, 0x10, value)
+            self.bus.write_byte_data(0x54, 0x11, value)
+            self.bus.write_byte_data(0x54, 0x12, value)
+            self.bus.write_byte_data(0x54, 0x16, 0xFF)
+        elif arm == 3:
+            self.bus.write_byte_data(0x54, 0x01, value)
+            self.bus.write_byte_data(0x54, 0x02, value)
+            self.bus.write_byte_data(0x54, 0x03, value)
+            self.bus.write_byte_data(0x54, 0x04, value)
+            self.bus.write_byte_data(0x54, 0x0F, value)
+            self.bus.write_byte_data(0x54, 0x0D, value)
+            self.bus.write_byte_data(0x54, 0x16, 0xFF)
+        else:
+            print "usage: arm([1-3],[0-255])"
+            sys.exit(1)
+
+
+    def color(self, color, value):
+
+        if color == 1 or color == "white":
+            self.bus.write_byte_data(0x54, 0x0A, value)
+            self.bus.write_byte_data(0x54, 0x0B, value)
+            self.bus.write_byte_data(0x54, 0x0D, value)
+            self.bus.write_byte_data(0x54, 0x16, 0xFF)
+        elif color == 2 or color == "blue":
+            self.bus.write_byte_data(0x54, 0x05, value)
+            self.bus.write_byte_data(0x54, 0x0C, value)
+            self.bus.write_byte_data(0x54, 0x0F, value)
+            self.bus.write_byte_data(0x54, 0x16, 0xFF)
+        elif color == 3 or color == "green":
+            self.bus.write_byte_data(0x54, 0x06, value)
+            self.bus.write_byte_data(0x54, 0x04, value)
+            self.bus.write_byte_data(0x54, 0x0E, value)
+            self.bus.write_byte_data(0x54, 0x16, 0xFF)
+        elif color == 4 or color == "yellow":
+            self.bus.write_byte_data(0x54, 0x09, value)
+            self.bus.write_byte_data(0x54, 0x03, value)
+            self.bus.write_byte_data(0x54, 0x10, value)
+            self.bus.write_byte_data(0x54, 0x16, 0xFF)
+        elif color == 5 or color == "orange":
+            self.bus.write_byte_data(0x54, 0x08, value)
+            self.bus.write_byte_data(0x54, 0x02, value)
+            self.bus.write_byte_data(0x54, 0x11, value)
+            self.bus.write_byte_data(0x54, 0x16, 0xFF)
+        elif color == 6 or color == "red":
+            self.bus.write_byte_data(0x54, 0x07, value)
+            self.bus.write_byte_data(0x54, 0x01, value)
+            self.bus.write_byte_data(0x54, 0x12, value)
+            self.bus.write_byte_data(0x54, 0x16, 0xFF)
+        else:
+            print "usage: color(<color>,[-0-255])"
+            sys.exit(1)
