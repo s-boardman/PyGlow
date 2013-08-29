@@ -93,3 +93,11 @@ If it works successfully you can choose the level of brightness for each color.
 ### Use it on your own
 
 In the examples/ dir are some files to show you how to use PyGlow.
+
+## Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
