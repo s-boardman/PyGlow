@@ -7,7 +7,7 @@ It was started as "PiGlow" by Jason (@Boeeerb https://github.com/Boeeerb/PiGlow)
 ## Features
 
  - Control a single LED, a single Arm, a single color or any combination of this
- - Gamma Correction
+ - Gamma Correction, makes the progression from 0-255 more visually linear
 
 
 ## Files
