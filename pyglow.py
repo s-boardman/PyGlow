@@ -6,7 +6,7 @@
 ##
 ##      for info & documentation see:    https://github.com/benleb/PYGlow
 ##
-##  by Ben (@ben_leb)
+##  by Ben Lebherz (@ben_leb)
 
 
 ## import some things
