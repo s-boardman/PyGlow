@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-##
 ##  PyGlow
 ##
 ##      python module to control Pimoronis PiGlow (http://shop.pimoroni.com/products/piglow)
@@ -8,6 +7,7 @@
 ##      for info & documentation see:    https://github.com/benleb/PYGlow
 ##
 ##  by Ben (@ben_leb)
+
 
 ## import some things
 import re, sys
