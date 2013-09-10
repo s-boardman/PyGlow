@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 ##
 ##  PyGlow
 ##
@@ -6,6 +8,8 @@
 ##      for info & documentation see:    https://github.com/benleb/PYGlow
 ##
 
+
+## import some things
 import re, sys
 import RPi.GPIO as rpi
 from smbus import SMBus
