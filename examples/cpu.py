@@ -3,7 +3,7 @@
 ##
 ##      python module to control Pimoronis PyGlow (http://shop.pimoroni.com/products/pyglow)
 ##
-##      * clock.py - binary clock by Jason (@Boeeerb https://github.com/Boeeerb/PyGlow)
+##      * cpu.py - cpu percentage utilisation indicator by Jason (@Boeeerb https://github.com/Boeeerb/PyGlow)
 ##      ! requires psutil - sudo apt-get install python-psutil
 ##
 
