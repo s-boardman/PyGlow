@@ -77,14 +77,14 @@ class PyGlow:
             sleep(fabs(sin(step/speed/2)))
             step -= 1
 
-    def pulse_all(self, value):
+    def pulse_all(self, value, speed):
         if 0 <= value <= 255:
             leds = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
             self.pulse_loop(leds, value, speed)
         else:
             lights_off("usage: pulse_all([0-255])")
 
-    def pulse_arm(self, arm, value):
+    def pulse_arm(self, arm, value, speed):
         if arm == 1 and 0 <= value <= 255:
             leds = [1,2,3,4,5,6]
         elif arm == 2 and 0 <= value <= 255:
