@@ -65,13 +65,13 @@ class PyGlow:
         while (step <= value):
             self.set_leds(led, step)
             self.update_leds()
-            sleep(1)
+            sleep(0.001)
             step += 1
         while (step >= 0):
-            step -= 1
             self.set_leds(led, step)
             self.update_leds()
-            sleep(1)
+            sleep(0.001)
+	    step -= 1
 
 
     def led(self, led, value):
