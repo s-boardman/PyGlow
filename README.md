@@ -42,6 +42,9 @@ pyglow.arm([1-3],[0-255])           # Control an arm of LEDs by number
 pyglow.set_leds(<led list>,[0-255]  # this function allows you to control a individual set of leds
                                     # first argument has to be a list of leds [1-18] or <color>[1-18]
 pyglow.update_leds()                # updates the leds according to values set with set_leds
+pyglow.pulse([led], [brightness], [speed])
+pyglow.pulse_all([brightness], [speed])
+pyglow.pulse_arm([arm], [brightness], [speed])
 ```
 the set_leds() & update_leds() function allows you to control a individual set of leds & work as follow (theres also an set_leds.py in example/)
 ```python
