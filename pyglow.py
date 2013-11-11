@@ -62,13 +62,13 @@ class PyGlow:
     def pulse(self, led, value):
         led = [led];
         step = 0
-        for step in value:
+        while (step <= value):
             self.set_leds(led, step)
             self.update_leds()
             sleep(1)
-            step++
-        while step != 0:
-            step--
+            step += 1
+        while (step >= 0):
+            step -= 1
             self.set_leds(led, step)
             self.update_leds()
             sleep(1)
