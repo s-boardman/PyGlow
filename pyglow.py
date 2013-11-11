@@ -69,12 +69,12 @@ class PyGlow:
         while (step <= value):
             self.set_leds(led, int(ceil(sin(step/value))*value))
             self.update_leds()
-            sleep(0.005)
+            sleep(1)
             step += 1
         while (step >= 0):
             self.set_leds(led, int(ceil(sin(step/value))*value))
             self.update_leds()
-            sleep(0.005)
+            sleep(1)
             step -= 1
 
     def pulse_all(self, value):
