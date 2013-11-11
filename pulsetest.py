@@ -11,6 +11,7 @@ from pyglow import PyGlow
 pyglow = PyGlow()
 
 val = input("Maximum Brightness: ")
+pyglow.all(0)
 print("Pulsing 1 Light")
 pyglow.pulse(1, val)
 print("Pulsing Arms")
