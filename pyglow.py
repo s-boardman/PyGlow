@@ -8,6 +8,8 @@
 ##
 ##  by Ben Lebherz (@ben_leb)
 
+## Pulse Features added by Austin Parker (@austinlparker)
+
 
 ## import some things
 import re, sys
@@ -61,17 +63,20 @@ class PyGlow:
             lights_off("usage: all([0-255])")
 
     def pulse(self, led, value, speed):
+
         led = [led];
         self.pulse_loop(led, value, speed)
 
+
     def pulse_loop(self, led, value, speed):
+
         step = 0
-        while (step <= value):
+        while (step <= value): ## step up to maximum brightness
             self.set_leds(led, step)
             self.update_leds()
-            sleep(fabs(sin(step/speed/2)))
+            sleep(fabs(sin(step/speed/2))) 
             step += 1
-        while (step >= 0):
+        while (step >= 0): ## step down to 0
             self.set_leds(led, step)
             self.update_leds()
             sleep(fabs(sin(step/speed/2)))

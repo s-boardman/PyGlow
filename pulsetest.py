@@ -11,7 +11,7 @@ from pyglow import PyGlow
 pyglow = PyGlow()
 
 val = input("Maximum Brightness: ")
-speedval = input("Speed: ")
+speedval = input("Speed (Try 500 as a default): ")
 pyglow.all(0)
 print("Pulsing 1 Light")
 pyglow.pulse(1, val, speedval)
