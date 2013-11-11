@@ -14,7 +14,7 @@ import re, sys
 import RPi.GPIO as rpi
 from smbus import SMBus
 from time import sleep
-from math import sin, ceil
+from math import sin, fabs
 
 ## some addresses
 I2C_ADDR = 0x54
@@ -67,14 +67,14 @@ class PyGlow:
     def pulse_loop(self, led, value):
         step = 0
         while (step <= value):
-            self.set_leds(led, int(ceil(sin(step/value))*value))
+            self.set_leds(led, int(fabs(sin(step/value)*value))
             self.update_leds()
-            sleep(1)
+            sleep(0.1)
             step += 1
         while (step >= 0):
-            self.set_leds(led, int(ceil(sin(step/value))*value))
+            self.set_leds(led, int(fabs(sin(step/value))*value))
             self.update_leds()
-            sleep(1)
+            sleep(0.1)
             step -= 1
 
     def pulse_all(self, value):
