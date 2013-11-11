@@ -59,23 +59,27 @@ class PyGlow:
         else:
             lights_off("usage: all([0-255])")
 
+    def pulse(self, led, value):
+        led = [led];
+        self.pulse_loop(led, value)
+
     def pulse_loop(self, led, value):
         step = 0
         while (step <= value):
             self.set_leds(led, step)
             self.update_leds()
-            sleep(0.001)
+            sleep(0.05)
             step += 1
         while (step >= 0):
             self.set_leds(led, step)
             self.update_leds()
-            sleep(0.001)
-	    step -= 1
+            sleep(0.05)
+            step -= 1
 
     def pulse_all(self, value):
         if 0 <= value <= 255:
             leds = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
-            self.pulse(leds, value)
+            self.pulse_loop(leds, value)
         else:
             lights_off("usage: pulse_all([0-255])")
 
@@ -89,7 +93,7 @@ class PyGlow:
         else:
             self.lights_off("usage: pulse_arm([1-3],[0-255])")
 
-        self.pulse(leds, value)
+        self.pulse_loop(leds, value)
 
 
     def led(self, led, value):
