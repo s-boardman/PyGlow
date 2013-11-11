@@ -13,6 +13,7 @@
 import re, sys
 import RPi.GPIO as rpi
 from smbus import SMBus
+from time import sleep
 
 ## some addresses
 I2C_ADDR = 0x54
@@ -57,6 +58,20 @@ class PyGlow:
             self.update_leds()
         else:
             lights_off("usage: all([0-255])")
+
+    def pulse(self, led, value):
+        led = [led];
+        step = 0
+        for step in value:
+            self.set_leds(led, step)
+            self.update_leds()
+            sleep(1)
+            step++
+        while step != 0:
+            step--
+            self.set_leds(led, step)
+            self.update_leds()
+            sleep(1)
 
 
     def led(self, led, value):
