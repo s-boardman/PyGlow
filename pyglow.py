@@ -8,11 +8,15 @@
 ##
 ##  by Ben Lebherz (@ben_leb)
 
+## Pulse Features added by Austin Parker (@austinlparker)
+
 
 ## import some things
 import re, sys
 import RPi.GPIO as rpi
 from smbus import SMBus
+from time import sleep
+from math import sin, fabs
 
 ## some addresses
 I2C_ADDR = 0x54
@@ -57,6 +61,45 @@ class PyGlow:
             self.update_leds()
         else:
             lights_off("usage: all([0-255])")
+
+    def pulse(self, led, value, speed):
+
+        led = [led];
+        self.pulse_loop(led, value, speed)
+
+
+    def pulse_loop(self, led, value, speed):
+
+        step = 0
+        while (step <= value): ## step up to maximum brightness
+            self.set_leds(led, step)
+            self.update_leds()
+            sleep(fabs(sin(step/speed/2))) 
+            step += 1
+        while (step >= 0): ## step down to 0
+            self.set_leds(led, step)
+            self.update_leds()
+            sleep(fabs(sin(step/speed/2)))
+            step -= 1
+
+    def pulse_all(self, value, speed):
+        if 0 <= value <= 255:
+            leds = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
+            self.pulse_loop(leds, value, speed)
+        else:
+            lights_off("usage: pulse_all([0-255])")
+
+    def pulse_arm(self, arm, value, speed):
+        if arm == 1 and 0 <= value <= 255:
+            leds = [1,2,3,4,5,6]
+        elif arm == 2 and 0 <= value <= 255:
+            leds = [7,8,9,10,11,12]
+        elif arm == 3 and 0 <= value <= 255:
+            leds = [13,14,15,16,17,18]
+        else:
+            self.lights_off("usage: pulse_arm([1-3],[0-255])")
+
+        self.pulse_loop(leds, value, speed)
 
 
     def led(self, led, value):
