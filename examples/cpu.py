@@ -1,9 +1,9 @@
 ##
 ##  PyGlow
 ##
-##      python module to control Pimoronis PyGlow (http://shop.pimoroni.com/products/pyglow)
+##      python module to control Pimoronis PiGlow (http://shop.pimoroni.com/products/piglow)
 ##
-##      * cpu.py - cpu percentage utilisation indicator by Jason (@Boeeerb https://github.com/Boeeerb/PyGlow)
+##      * cpu.py - cpu percentage utilisation indicator by Jason (@Boeeerb https://github.com/Boeeerb/PiGlow)
 ##      ! requires psutil - sudo apt-get install python-psutil
 ##
 
