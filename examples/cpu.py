@@ -1,16 +1,23 @@
-##
-##  PyGlow
-##
-##      python module to control Pimoronis PiGlow (http://shop.pimoroni.com/products/piglow)
-##
-##      * cpu.py - cpu percentage utilisation indicator by Jason (@Boeeerb https://github.com/Boeeerb/PiGlow)
-##      ! requires psutil - sudo apt-get install python-psutil
-##
+#####
+#
+# PyGlow
+#
+#####
+#
+# Python module to control Pimoronis PiGlow
+# [http://shop.pimoroni.com/products/piglow]
+#
+# * cpu.py - cpu percentage utilisation indicator by Jason (@Boeeerb)
+# [https://github.com/Boeeerb/PiGlow]
+# ! requires psutil - sudo apt-get install python-psutil
+#
+#####
 
 
-from pyglow import PyGlow
+from PyGlow import PyGlow
 from time import sleep
 import psutil
+
 
 pyglow = PyGlow()
 
@@ -41,4 +48,5 @@ while True:
         pyglow.color("orange", 20)
     else:
         pyglow.all(20)
+
     sleep(0.2)

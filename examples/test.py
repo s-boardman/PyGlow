@@ -1,12 +1,19 @@
-##
-##  PyGlow
-##
-##      python module to control Pimoronis PiGlow (http://shop.pimoroni.com/products/piglow)
-##
-##      * test.py - set brightness for each color individually
-##
+#####
+#
+# PyGlow
+#
+#####
+#
+# Python module to control Pimoronis PiGlow
+# [http://shop.pimoroni.com/products/piglow]
+#
+# * test.py - set brightness for each color individually
+#
+#####
 
-from pyglow import PyGlow
+
+from PyGlow import PyGlow
+
 
 pyglow = PyGlow()
 
