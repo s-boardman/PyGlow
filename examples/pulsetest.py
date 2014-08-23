@@ -15,20 +15,20 @@
 from PyGlow import PyGlow
 
 
-pyglow = PyGlow()
+b = input("Maximum brightness: ")
+s = input("Speed in milliseconds (try 1000 as a default): ")
 
-val = input("Maximum Brightness: ")
-speedval = input("Speed (Try 500 as a default): ")
+pyglow = PyGlow(brightness=b, speed=s, pulse=True)
 
 pyglow.all(0)
 
 print("Pulsing 1 Light")
-pyglow.pulse(1, val, speedval)
+pyglow.led(1)
 
 print("Pulsing Arms")
-pyglow.pulse_arm(1, val, speedval)
-pyglow.pulse_arm(2, val, speedval)
-pyglow.pulse_arm(3, val, speedval)
+pyglow.arm(1)
+pyglow.arm(2)
+pyglow.arm(3)
 
 print("Pulsing All")
-pyglow.pulse_all(val, speedval)
+pyglow.all()

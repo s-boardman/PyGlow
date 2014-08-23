@@ -77,8 +77,11 @@ See the other files in the `examples` directory for more examples how to us
 PyGlow.
 
 
-Functions
-=========
+Usage
+=====
+
+Instantiation
+-------------
 
 In order to be able to use PyGlow module, the `PyGlow()` class must be
 imported:
@@ -95,23 +98,34 @@ pyglow = PyGlow()
 
 The `PyGlow()` object can accept two optional parameters:
 
-- `brightness=None` - sets default brightness level (value from `0` and `255`)
-- `speed=None` - sets default pulsing speed in milliseconds
+- `brightness=None` - sets default brightness level (value: number from `0` and
+  `255`)
+- `speed=None` - sets default pulsing speed in milliseconds (value: number > 0)
+- `pulse=None` - enables pulsing by default (value: `True` or `False`)
+- `pulse_dir=None` - sets default pulsation direction (value: `UP`, `DOWN`,
+   `BOTH`)
 
-The default value is used across all function unless overridden on the function
-level. If the default value is not set during the object instantiation, it must
-be set on the function level.
+The default parameter values are used across all functions unless overridden on
+the function level. If the default parameter value is not set during the object
+instantiation, it must be set on the function level. The value for the parameter
+`speed` and `pulse_dir` must be set only if the parameter `pulse=True`.
+
+
+Functions
+---------
 
 Functions provided by the `PyGlow()` object are:
 
 
-### `led(led, brightness=None)`
+### `led(led, brightness=None, speed=None, pulse=None, pulse_dir=None)`
 
 Sets the specific `led` to the `brightness` level. The `led` is in the range of
-`1` to `18`. The `brightness` value is in the range of `0` to `255`.
+`1` to `18`. The `led` parameter can also be a list of individual leds. The
+other parameters can have the same value like in the case of the object
+instantiation.
 
 
-### `color(color, brightness=None)`
+### `color(color, brightness=None, speed=None, pulse=None, pulse_dir=None)`
 
 Sets the specific `color` group to the `brightness` level. The `color` group
 can be either a number or a name:
@@ -123,73 +137,42 @@ can be either a number or a name:
 - `5` = `orange`
 - `6` = `red`
 
-The `brightness` value is in the range of `0` to `255`.
+The other parameters can have the same value like in the case of the object
+instantiation.
 
 
-### `arm(arm, brightness=None)`
+### `arm(arm, brightness=None, speed=None, pulse=None, pulse_dir=None)`
 
 Sets the specific LED `arm` to the `brightness` level. The `arm` value can be
-either `1`, `2` or `3`. The `brightness` value is in the range of `0` to `255`.
+either `1`, `2` or `3`. The other parameters can have the same value like in
+the case of the object instantiation.
 
 
-### `all(brightness=None)`
+### `all(brightness=None, speed=None, pulse=None, pulse_dir=None)`
 
-Sets all LEDs to the `brightness` level. The `brightness` value is in the range
-of `0` to `255`.
-
-
-### `pulse(led, brightness=None, speed=None)`
-
-Pulses with a specific `led` to the `brightness` level with the `speed`. The
-`led` value is in the range of `1` to `18`. The `brightness` value is in the
-range of `0` to `255`. The `speed` value is in milliseconds.
+Sets all LEDs to the `brightness` level. The parameters can have the same value
+like in the case of the object instantiation.
 
 
-### `pulse_color(color, brightness=None, speed=None)`
+### `set_leds(leds, brightness=None, speed=None, pulse=None, pulse_dir=None)`
 
-Pulses with a specific `color` group to the `brightness` level with the
-`speed`. The `color` group value can be be either a number or a name:
-
-- `1` = `white`
-- `2` = `blue`
-- `3` = `green`
-- `4` = `yellow`
-- `5` = `orange`
-- `6` = `red`
-
-The `brightness` value is in the range of `0` to `255`. The `speed` value is in
-milliseconds.
-
-
-### `pulse_arm(arm, brightness=None, speed=None)`
-
-Pulses with a specific `arm` to the `brightness` level with the specified
-`speed`. The `led` value is in the range of `1` to `18`. The `brightness` value
-is in the range of `0` to `255`. The `speed` value is in milliseconds.
-
-
-### `pulse_all(brightness=None, speed=None)`
-
-Pulses with all LEDs to the `brightness` level with the `speed`. The `led`
-value is in the range of `1` to `18`. The `brightness` value is in the range of
-`0` to `255`. The `speed` value is in milliseconds.
-
-
-### `set_leds(leds, brightness=None)`
-
-Sets a list of `leds` to the `brightness` level. The `leds` list can be
-composed of numbers from `1` to `18`. The `brightness` value is in the range of
-`0` to `255`. The set `brightness` will take effect only after the
+Prepares the list of `leds` to be set to the `brightness` level. The `leds`
+list can be composed of numbers from `1` to `18` or connection of `color` name
+and `arm` number (e.g. `red1` will light up the `red` LED in the arm `1`). The
+other parameters can have the same value like in the case of the object
+instantiation. The set `brightness` will take effect only after the
 `update_leds()` is called (see bellow).
 
 
 ### `update_leds()`
 
-Sets the brightness level to all LEDs specified by the `set_leds()` function.
+Sets the brightness level of all LEDs specified by the `set_leds()` function.
 
 ```
-leds = [1, 3, 5, 11, 13, 15]
-pyglow.set_leds(leds, 50)
+leds_odd = [1, 3, 5, 7, 9, 11, 13, 15, 17]
+leds_even = [2, 4, 6, 8, 10, 12, 14, 16, 18]
+pyglow.set_leds(leds_odd, 150)
+pyglow.set_leds(leds_even, 10)
 pyglow.update_leds()
 ```
 
