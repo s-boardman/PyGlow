@@ -1,1 +1,1 @@
-from .pyglow import *
+from .PyGlow import *
