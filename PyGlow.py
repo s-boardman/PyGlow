@@ -106,7 +106,7 @@ class PyGlow:
         # Check what Raspberry Pi version we got
         if rpi.RPI_REVISION == 1:
             i2c_bus = 0
-        elif rpi.RPI_REVISION == 2:
+        elif rpi.RPI_REVISION == 2 or rpi.RPI_REVISION == 3:
             i2c_bus = 1
         else:
             raise PyGlowException(
