@@ -77,6 +77,20 @@ See the other files in the `examples` directory for more examples how to us
 PyGlow.
 
 
+Install using pip
+-----------------
+
+If you just want to install the PyGlow library for use in your own project,
+you can also install it using pip
+
+```
+$ pip install git+https://github.com/benleb/PyGlow.git
+```
+
+The PyGlow.py files will be downloaded and placed in the site-packages directory
+ready for use.
+
+
 Usage
 =====
 
