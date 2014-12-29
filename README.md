@@ -1,16 +1,16 @@
 PyGlow
 ======
 
-PyGlow is a small Python module for the PiGlow addon by Pimoroni which will let
+PyGlow is a small Python module for the PiGlow addon by [Pimoroni](http://www.pimoroni.com/) which will let
 you flex the LED muscles of this fantastic addon. It was started as
-[PiGlow](https://github.com/Boeeerb/PiGlow) by Jason (@Boeeerb) but I
-(@ben_leb) decided to fork it to provide a more clean and easier to use module.
+[PiGlow](https://github.com/Boeeerb/PiGlow) by Jason ([@Boeeerb](https://twitter.com/Boeeerb)) but I
+([@ben_leb](https://twitter.com/ben_leb)) decided to fork it to provide a more clean and easier to use module.
 
 
 Features
 ========
 
-- Control a single LED, a single arm, a single color or any combination of this
+- Control a single LED, a single arm, a single color or any combination of these
 - Pulsing LED
 - Gamma Correction (makes the progression from `0-255` more visually linear)
 
@@ -21,7 +21,7 @@ Installation instructions
 Preparation
 -----------
 
-For instruction hot to setup Raspberry Pi to use with PyGlow, please see
+For instructions on how to setup Raspberry Pi for use with PyGlow, please see
 https://github.com/pimoroni/piglow#setting-up-your-raspberry-pi
 
 
@@ -29,7 +29,7 @@ Requirements
 ------------
 
 PyGlow module requires the `smbus` Python module. It must be installed before
-the PyGlow modules is used. Example of installation for
+the PyGlow module is used. Example of installation for
 [RASPBIAN](http://raspbian.org/):
 
 ```
@@ -60,7 +60,7 @@ environment variable  with a path to the module must be exported (you can add
 it into your `~/.bashrc`):
 
 ```
-export PYTHONPATH="$PYTHONPATH:~/lib/python"
+export PYTHONPATH=$PYTHONPATH:~/lib/python
 ```
 
 Now go to the `examples` directory and run the testing script:
@@ -73,8 +73,8 @@ python test.py
 If the script loads, you can set the brightness of each LED color group by
 typing a number between `0` (off) and `255` (brightest).
 
-See the other files in the `examples` directory for more examples how to us
-PyGlow.
+See the other files in the [`examples`](https://github.com/benleb/PyGlow/tree/master/examples) directory for more examples 
+of how to use PyGlow.
 
 
 Install using pip
@@ -110,7 +110,7 @@ Then it's possible to instantiate the `PyGlow()` object:
 pyglow = PyGlow()
 ```
 
-The `PyGlow()` object can accept two optional parameters:
+The `PyGlow()` object can accept four optional parameters:
 
 - `brightness=None` - sets default brightness level (value: number from `0` and
   `255`)
@@ -196,8 +196,8 @@ Files
 
 - `pyglow.py` - Python module providing the PyGlow class
 - `examples/bin_clock.py` - binary clock by Jiri Tyr
-- `examples/clock.py` - binary clock by Jason (@Boeeerb)
-- `examples/cpu.py` - CPU percentage indicator by Jason (@Boeeerb)
+- `examples/clock.py` - binary clock by Jason ([@Boeeerb](https://twitter.com/Boeeerb))
+- `examples/cpu.py` - CPU percentage indicator by Jason ([@Boeeerb](https://twitter.com/Boeeerb))
 - `examples/pulsetest.py` - shows how to use LED pulsing
 - `examples/set_leds.py` - shows how `set_leds()` and `update_leds()` works
 - `examples/test.py` - allows to choose the brightness of each LED color group
