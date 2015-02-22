@@ -3,11 +3,12 @@ PyGlow
 
 PyGlow is a small Python module for the PiGlow addon by [Pimoroni](http://www.pimoroni.com/) which will let
 you flex the LED muscles of this fantastic addon. It was started as
-[PiGlow](https://github.com/Boeeerb/PiGlow) by Jason ([@Boeeerb](https://twitter.com/Boeeerb)) but I
-([@ben_leb](https://twitter.com/ben_leb)) decided to fork it to provide a more clean and easier to use module.
+[PiGlow](https://github.com/Boeeerb/PiGlow) by Jason ([@Boeeerb](https://twitter.com/Boeeerb)) and has been forked by
+([@ben_leb](https://twitter.com/ben_leb)) to provide a more clean and easier to use module.
 
+I ([@s_boardman](https://twitter.com/s_boardman) aim to create a web interface to set the colour and brightness via a browser rather than programmatically.
 
-Features
+Features (from PyGlow by [@ben_leb](https://twitter.com/ben_leb))
 ========
 
 - Control a single LED, a single arm, a single color or any combination of these
@@ -194,13 +195,13 @@ pyglow.update_leds()
 Files
 =====
 
-- `pyglow.py` - Python module providing the PyGlow class
+- `pyglow.py` - Python module providing the PyGlow class by Ben [@ben_leb](https://twitter.com/ben_leb)
 - `examples/bin_clock.py` - binary clock by Jiri Tyr
 - `examples/clock.py` - binary clock by Jason ([@Boeeerb](https://twitter.com/Boeeerb))
 - `examples/cpu.py` - CPU percentage indicator by Jason ([@Boeeerb](https://twitter.com/Boeeerb))
-- `examples/pulsetest.py` - shows how to use LED pulsing
-- `examples/set_leds.py` - shows how `set_leds()` and `update_leds()` works
-- `examples/test.py` - allows to choose the brightness of each LED color group
+- `examples/pulsetest.py` - shows how to use LED pulsing by Ben [@ben_leb](https://twitter.com/ben_leb)
+- `examples/set_leds.py` - shows how `set_leds()` and `update_leds()` works by [@ben_leb](https://twitter.com/ben_leb)
+- `examples/test.py` - allows to choose the brightness of each LED color group by Ben [@ben_leb](https://twitter.com/ben_leb)
 
 
 Contributing
