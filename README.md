@@ -6,7 +6,7 @@ you flex the LED muscles of this fantastic addon. It was started as
 [PiGlow](https://github.com/Boeeerb/PiGlow) by Jason ([@Boeeerb](https://twitter.com/Boeeerb)) and has been forked by
 ([@ben_leb](https://twitter.com/ben_leb)) to provide a more clean and easier to use module.
 
-I ([@s_boardman](https://twitter.com/s_boardman) aim to create a web interface to set the colour and brightness via a browser rather than programmatically.
+I ([@s_boardman](https://twitter.com/s_boardman)) aim to create a web interface to set the colour and brightness via a browser rather than programmatically.
 
 Features (from PyGlow by [@ben_leb](https://twitter.com/ben_leb))
 ========
@@ -51,7 +51,7 @@ $ cd ~/lib/python/
 Next get the latest version of PyGlow python module:
 
 ```
-git clone https://github.com/benleb/PyGlow.git
+git clone https://github.com/s-boardman/PyGlow.git
 ```
 
 This will download the PyGlow module into the `~/lib/python/PyGlow` directory.
@@ -74,7 +74,7 @@ python test.py
 If the script loads, you can set the brightness of each LED color group by
 typing a number between `0` (off) and `255` (brightest).
 
-See the other files in the [`examples`](https://github.com/benleb/PyGlow/tree/master/examples) directory for more examples 
+See the other files in the [`examples`](https://github.com/s-boardman/PyGlow/tree/master/examples) directory for more examples 
 of how to use PyGlow.
 
 
@@ -85,7 +85,7 @@ If you just want to install the PyGlow library for use in your own project,
 you can also install it using pip
 
 ```
-$ pip install git+https://github.com/benleb/PyGlow.git
+$ pip install git+https://github.com/s-boardman/PyGlow.git
 ```
 
 The PyGlow.py files will be downloaded and placed in the site-packages directory
