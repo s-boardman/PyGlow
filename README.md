@@ -34,7 +34,7 @@ the PyGlow module is used. Example of installation for
 [RASPBIAN](http://raspbian.org/):
 
 ```
-sudo apt-get install python-smbus
+sudo apt-get install python-smbus i2c-tools
 ```
 
 
