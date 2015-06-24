@@ -7,7 +7,7 @@
 # Python module to control Pimoronis PiGlow
 # [http://shop.pimoroni.com/products/piglow]
 #
-# * clock.py - binary clock by Jason (@Boeeerb)
+# * clock.py - binary clock by Jason (@Boeeerb) & Remi (rparpa)
 # [https://github.com/Boeeerb/PiGlow]
 #
 #####
@@ -28,14 +28,21 @@ pyglow = PyGlow()
 show12hr = 0
 # Set brightness of LED - 1-255
 # (recommend 10-20, put 0 and you won't see it!)
-ledbrightness = 50
+led_brightness = 50
 # Choose how to flash change of hour - 1= white leds, 2= all flash
-hourflash = 1
+hour_flash = 2
 
-# h= hour, m= minutes, s= seconds
-armtop = "s"
-armright = "m"
-armbottom = "h"
+# arms
+arm_top = {i: 0 for i in range(1, 7)}
+arm_right = {i: 0 for i in range(7, 13)}
+arm_bottom = {i: 0 for i in range(13, 19)}
+
+# link arm to a time value
+armConfig = {
+    "1_seconds": arm_top,
+    "2_minutes": arm_right,
+    "3_hours": arm_bottom,
+}
 
 ###
 # End of customising
@@ -43,96 +50,49 @@ armbottom = "h"
 
 pyglow.all(0)
 
-hourcount = 0
-hourcurrent = 0
+hour_count = 0
+hour_current = 0
+
+
+def assign_binary_value_to_arm(binary_value, arm):
+    arm_led_numbers = [n for n in sorted(arm.iterkeys())]
+    return {arm_led_numbers[key]: value for key, value in enumerate(reversed(list(binary_value)))}
+
+
+def turn_on_off_led(hour, minute, second):
+    bin_hour = "%06s" % bin(hour)[2:]
+    bin_min = "%06s" % bin(minute)[2:]
+    bin_sec = "%06s" % bin(second)[2:]
+
+    armConfig["1_seconds"] = assign_binary_value_to_arm(bin_sec, armConfig["1_seconds"])
+    armConfig["2_minutes"] = assign_binary_value_to_arm(bin_min, armConfig["2_minutes"])
+    armConfig["3_hours"] = assign_binary_value_to_arm(bin_hour, armConfig["3_hours"])
+
+    for key in sorted(armConfig.iterkeys()):
+        for led_number in sorted(armConfig[key].iterkeys()):
+            pyglow.led(led_number, led_brightness if armConfig[key][led_number] == "1" else 0)
 
 while True:
-    time = datetime.now().time()
-    hour, min, sec = str(time).split(":")
-    sec, micro = str(sec).split(".")
+    now = datetime.now()
+    hour = now.hour
 
-    hour = int(hour)
-    if show12hr == 1:
-        if hour > 12:
-            hour = hour - 12
-
-    min = int(min)
-    sec = int(sec)
-
-    binhour = "%06d" % int(bin(hour)[2:])
-    binmin = "%06d" % int(bin(min)[2:])
-    binsec = "%06d" % int(bin(sec)[2:])
+    if show12hr == 1 and now.hour > 12:
+        hour -= 12
 
     # Check if current hour is different and set ready to flash hour
-    if hourcurrent != hour:
-        hourcount = hour
-        hourcurrent = hour
+    if hour_current != hour:
+        hour_count, hour_current = hour, hour
 
-    if armbottom == "h":
-        arm3 = list(binhour)
-    elif armbottom == "m":
-        arm3 = list(binmin)
-    else:
-        arm3 = list(binsec)
-    led13 = ledbrightness if arm3[5] == "1" else 0
-    pyglow.led(13, led13)
-    led14 = ledbrightness if arm3[4] == "1" else 0
-    pyglow.led(14, led14)
-    led15 = ledbrightness if arm3[3] == "1" else 0
-    pyglow.led(15, led15)
-    led16 = ledbrightness if arm3[2] == "1" else 0
-    pyglow.led(16, led16)
-    led17 = ledbrightness if arm3[1] == "1" else 0
-    pyglow.led(17, led17)
-    led18 = ledbrightness if arm3[0] == "1" else 0
-    pyglow.led(18, led18)
-
-    if armright == "h":
-        arm2 = list(binhour)
-    elif armright == "m":
-        arm2 = list(binmin)
-    else:
-        arm2 = list(binsec)
-    led07 = ledbrightness if arm2[5] == "1" else 0
-    pyglow.led(7, led07)
-    led08 = ledbrightness if arm2[4] == "1" else 0
-    pyglow.led(8, led08)
-    led09 = ledbrightness if arm2[3] == "1" else 0
-    pyglow.led(9, led09)
-    led10 = ledbrightness if arm2[2] == "1" else 0
-    pyglow.led(10, led10)
-    led11 = ledbrightness if arm2[1] == "1" else 0
-    pyglow.led(11, led11)
-    led12 = ledbrightness if arm2[0] == "1" else 0
-    pyglow.led(12, led12)
-
-    if armtop == "h":
-        arm1 = list(binhour)
-    elif armtop == "m":
-        arm1 = list(binmin)
-    else:
-        arm1 = list(binsec)
-    led01 = ledbrightness if arm1[5] == "1" else 0
-    pyglow.led(1, led01)
-    led02 = ledbrightness if arm1[4] == "1" else 0
-    pyglow.led(2, led02)
-    led03 = ledbrightness if arm1[3] == "1" else 0
-    pyglow.led(3, led03)
-    led04 = ledbrightness if arm1[2] == "1" else 0
-    pyglow.led(4, led04)
-    led05 = ledbrightness if arm1[1] == "1" else 0
-    pyglow.led(5, led05)
-    led06 = ledbrightness if arm1[0] == "1" else 0
-    pyglow.led(6, led06)
+    turn_on_off_led(hour, now.minute, now.second)
 
     # Flash the white leds for the hour
-    if hourcount != 0:
+    if hour_count != 0:
         sleep(0.5)
-        if hourflash == 1:
-            pyglow.color("white", ledbrightness)
-        if hourflash == 2:
-            pyglow.all(ledbrightness)
+        if hour_flash == 1:
+            pyglow.color("white", led_brightness)
+        if hour_flash == 2:
+            pyglow.all(led_brightness)
         sleep(0.5)
-        hourcount = hourcount - 1
+        hour_count -= 1
     else:
         sleep(0.1)
