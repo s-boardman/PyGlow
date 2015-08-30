@@ -13,6 +13,8 @@
 #
 #####
 
+from __future__ import print_function
+
 
 from datetime import datetime
 from PyGlow import PyGlow, ARM_LED_LIST, BOTH
@@ -52,7 +54,7 @@ def main():
         while True:
             print_time(pg)
     except KeyboardInterrupt:
-        print ''
+        print('')
         pg.all(0)
 
 
