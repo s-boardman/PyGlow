@@ -18,7 +18,7 @@ from PyGlow import PyGlow
 b = input("Maximum brightness: ")
 s = input("Speed in milliseconds (try 1000 as a default): ")
 
-pyglow = PyGlow(brightness=b, speed=s, pulse=True)
+pyglow = PyGlow(brightness=int(b), speed=int(s), pulse=True)
 
 pyglow.all(0)
 
