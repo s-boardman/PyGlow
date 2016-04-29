@@ -18,22 +18,22 @@ from PyGlow import PyGlow
 pyglow = PyGlow()
 
 val = input("White: ")
-pyglow.color("white", val)
+pyglow.color("white", int(val))
 
 val = input("Blue: ")
-pyglow.color("blue", val)
+pyglow.color("blue", int(val))
 
 val = input("Green: ")
-pyglow.color("green", val)
+pyglow.color("green", int(val))
 
 val = input("Yellow: ")
-pyglow.color("yellow", val)
+pyglow.color("yellow", int(val))
 
 val = input("Orange: ")
-pyglow.color("orange", val)
+pyglow.color("orange", int(val))
 
 val = input("Red: ")
-pyglow.color("red", val)
+pyglow.color("red", int(val))
 
 val = input("All: ")
-pyglow.all(val)
+pyglow.all(int(val))
